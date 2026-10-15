@@ -1,5 +1,7 @@
-import logger
-import pformat
+import logging
+from pprint import pformat
+
+logger = logging.getLogger(__name__)
 
 
 def log_object(name: str, obj: object) -> None:
