@@ -87,6 +87,8 @@ async def tavily_search(
         model=configurable.summarization_model,
         max_tokens=configurable.summarization_model_max_tokens,
         api_key=model_api_key,
+        # Structured output requires tool choice supported in non-thinking mode.
+        extra_body={"thinking": {"type": "disabled"}},
         tags=["langsmith:nostream"]
     ).with_structured_output(Summary).with_retry(
         stop_after_attempt=configurable.max_structured_output_retries
