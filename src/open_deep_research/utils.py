@@ -893,6 +893,10 @@ def get_api_key_for_model(model_name: str, config: RunnableConfig):
     """Get API key for a specific model from environment or config."""
     should_get_from_config = os.getenv("GET_API_KEYS_FROM_CONFIG", "false")
     model_name = model_name.lower()
+    # 修改为deepseekAPI
+    if model_name.startswith("deepseek:"):
+        return os.getenv("DEEPSEEK_API_KEY")
+
     if should_get_from_config.lower() == "true":
         api_keys = config.get("configurable", {}).get("apiKeys", {})
         if not api_keys:
